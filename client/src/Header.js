@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {UserContext} from "./UserContext";
 import {backendUrl} from "./api";
 
@@ -13,7 +13,7 @@ export default function Header() {
         setUserInfo(userInfo);
       });
     });
-  }, []);
+  }, [setUserInfo]);
 
   function logout() {
     fetch(`${backendUrl}/logout`, {
@@ -33,7 +33,7 @@ export default function Header() {
           <>
             <Link to="/create">Create new post</Link>
             <Link to="/profile">Profile</Link>
-            <a onClick={logout}>Logout ({username})</a>
+            <button type="button" onClick={logout} className="logout-btn">Logout ({username})</button>
           </>
         )}
         {!username && (
